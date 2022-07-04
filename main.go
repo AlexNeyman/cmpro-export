@@ -1,15 +1,15 @@
 package main
 
 import (
+	"cmpro/must"
 	"context"
 	"flag"
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"sync"
 	"time"
-
-	"cmpro/must"
 
 	"github.com/chromedp/cdproto/browser"
 	"github.com/chromedp/chromedp"
@@ -29,7 +29,7 @@ func main() {
 	var serviceURL, downloadsDir string
 
 	flag.StringVar(&serviceURL, "service-url", defaultServiceURL, "CM Pro Service URL")
-	flag.StringVar(&downloadsDir, "downloads-dir", must.String(os.Getwd())+"/Downloads", "Downloads dir")
+	flag.StringVar(&downloadsDir, "downloads-dir", filepath.Join(must.String(os.Getwd()), "Downloads"), "Downloads dir")
 	flag.Parse()
 
 	if serviceURL == "" {
