@@ -1,0 +1,563 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0021)http://192.168.1.136/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Production</title>
+    <link href="./Production_files/schnell.css" rel="stylesheet">
+    <script src="./Production_files/libreria.js"></script>
+    <script src="./Production_files/Chart.bundle.js"></script>
+    <script type="text/javascript">
+            //versione e matricola
+            var versione="Cage108 4.4.34";
+var matricola=" TELESCOPE";
+
+
+            //contiene i dati,che sono scritti da una funzione c++
+            var dati = new Array();
+var sitema_impirial = 0;
+var dato = new Array();
+dato.giorno = '20211019';
+dato.numero = '40';
+dato.diametri = new Array();
+dato.pesi = new Array();
+dato.tempo_on = 10665;
+dato.tempo_work = 284;
+dato.diametri[0] = 1;
+dato.pesi[0] = 0;
+dato.diametri[1] = 2;
+dato.pesi[1] = 0;
+dato.diametri[2] = 3;
+dato.pesi[2] = 0;
+dato.diametri[3] = 4;
+dato.pesi[3] = 0;
+dato.diametri[4] = 5;
+dato.pesi[4] = 0;
+dato.diametri[5] = 6;
+dato.pesi[5] = 0;
+dato.diametri[6] = 7;
+dato.pesi[6] = 0;
+dato.diametri[7] = 8;
+dato.pesi[7] = 0;
+dato.diametri[8] = 9;
+dato.pesi[8] = 0;
+dato.diametri[9] = 10;
+dato.pesi[9] = 0;
+dato.diametri[10] = 11;
+dato.pesi[10] = 0;
+dato.diametri[11] = 12;
+dato.pesi[11] = 0;
+dato.diametri[12] = 13;
+dato.pesi[12] = 0;
+dato.diametri[13] = 14;
+dato.pesi[13] = 0;
+dato.diametri[14] = 15;
+dato.pesi[14] = 0;
+dato.diametri[15] = 16;
+dato.pesi[15] = 0;
+dato.diametri[16] = 17;
+dato.pesi[16] = 0;
+dato.diametri[17] = 18;
+dato.pesi[17] = 0;
+dato.diametri[18] = 19;
+dato.pesi[18] = 0;
+dato.diametri[19] = 20;
+dato.pesi[19] = 3274872;
+dato.diametri[20] = 21;
+dato.pesi[20] = 0;
+dato.diametri[21] = 22;
+dato.pesi[21] = 0;
+dato.diametri[22] = 23;
+dato.pesi[22] = 0;
+dato.diametri[23] = 24;
+dato.pesi[23] = 0;
+dato.diametri[24] = 25;
+dato.pesi[24] = 0;
+dato.diametri[25] = 26;
+dato.pesi[25] = 0;
+dato.diametri[26] = 27;
+dato.pesi[26] = 0;
+dato.diametri[27] = 28;
+dato.pesi[27] = 0;
+dato.diametri[28] = 29;
+dato.pesi[28] = 0;
+dato.diametri[29] = 30;
+dato.pesi[29] = 0;
+dato.diametri[30] = 31;
+dato.pesi[30] = 0;
+dato.diametri[31] = 32;
+dato.pesi[31] = 0;
+dato.diametri[32] = 33;
+dato.pesi[32] = 0;
+dato.diametri[33] = 34;
+dato.pesi[33] = 0;
+dato.diametri[34] = 35;
+dato.pesi[34] = 0;
+dato.diametri[35] = 36;
+dato.pesi[35] = 0;
+dato.diametri[36] = 37;
+dato.pesi[36] = 0;
+dato.diametri[37] = 38;
+dato.pesi[37] = 0;
+dato.diametri[38] = 39;
+dato.pesi[38] = 0;
+dato.diametri[39] = 40;
+dato.pesi[39] = 0;
+dati[0] = dato;
+
+    </script>
+
+<script type="text/javascript">
+
+        //***********************************************************************************************************
+        //************* MAIN PROGRAM *******************************************************************************
+        //***********************************************************************************************************
+
+        var datiIntervallo;
+        var umPeso = "";
+        var ElencoGiorni = new CollezioneGiorni();
+        var itmDay = new ItemGiorno();
+        var GiorniSpeciali;
+        var dataSelz = "";
+        var dataSelzA = "";
+        var dataSelzB = "";
+        var sitema_impirial = 0;
+
+        function init() {
+            var count = 0;
+            count = dati.length;
+            umPeso = sitema_impirial > 0 ? " lbs " : " kg ";
+
+            //recupero i dati
+            for (var i = 0; i < count; i++) {
+
+                itmDay = new ItemGiorno();
+                itmDay.data = dati[i].giorno;
+                itmDay.numero = dati[i].numero;
+                itmDay.tempo_on = dati[i].tempo_on;
+                itmDay.tempo_work = dati[i].tempo_work;
+
+                var countPesi = dati[i].pesi.length;
+                var countDiam = dati[i].diametri.length;
+
+
+                for (var j = 0; j < countPesi; j++) {
+                    itmDay.pesi.push(dati[i].pesi[j]);
+                    itmDay.diametri.push(dati[i].diametri[j]);
+                }
+
+
+                ElencoGiorni.elenco.push(itmDay);               
+            }
+
+
+            GiorniSpeciali = ElencoGiorni.GetDate();
+
+            VisualizzaScelta(GiorniSpeciali[GiorniSpeciali.length - 1], GiorniSpeciali[0]);
+            
+        }
+        
+        
+    </script>  
+    
+    <script type="text/javascript">
+    
+        //funzione che visualizza le tre diverse modalita di selezione periodo
+        function VisualizzaSceltaPeriodo(sezione) {
+            dataSelz = "";
+            dataSelzA = "";
+            dataSelzB = "";
+            
+            switch (sezione) {
+                case "totale":
+                    document.getElementById("divCalendarioS").style.display = "none";
+                    document.getElementById("divCalendarioA").style.display = "none";
+                    document.getElementById("divCalendarioB").style.display = "none";
+                                        
+                    VisualizzaScelta(GiorniSpeciali[GiorniSpeciali.length - 1],GiorniSpeciali[0]);
+                    break;
+                case "singolo":
+                    document.getElementById("divCalendarioS").style.display = "";
+                    document.getElementById("divCalendarioA").style.display = "none";
+                    document.getElementById("divCalendarioB").style.display = "none";
+
+                    break;
+                case "periodo":
+                    document.getElementById("divCalendarioS").style.display = "none";
+                    document.getElementById("divCalendarioA").style.display = "";
+                    document.getElementById("divCalendarioB").style.display = "";
+                
+                    break;
+            }
+
+        }
+        function CreaCalendario() {
+            Calendar.setup(
+            {
+                inputField: "hiddenCalS",                // ID of the input field
+                ifFormat: "%m %d, %Y",                   // the date format
+                button: "btCal_S",                       // ID of the button
+                onUpdate: dateChangedGiornoS,            // Funzione da chiamare quando si seleziona una data
+                dateStatusFunc: specialDateStatusFunc,   // verifica se ci sono dati di produzione per ogni giorno del mese,abilitandolo al click
+                weekNumbers: false,                      // Nascondo i giorni della settimana
+                position: [600, 100]                     // Posizione in cui deve essere visualizzato
+            }
+        );         
+        }
+
+        function VisualizzaScelta(inizio, fine) {
+
+            var tempoAccesa = ElencoGiorni.GetTempoOn(inizio, fine);
+            var tempoLavoro = ElencoGiorni.GetTempoWork(inizio, fine);
+            var peso = ElencoGiorni.GetPeso(inizio, fine);
+            datiIntervallo = ElencoGiorni.getIntervallo(inizio, fine);         
+
+            // crea due nuovi array per diametri e pesi, ordinati per diametro crescente
+            datiIntervallo.forEach((giorno) => {
+                var list = [];
+                for (var j = 0; j < giorno.diametri.length; j++)
+                    list.push({ 'diametro': giorno.diametri[j], 'peso': giorno.pesi[j] });
+
+                list.sort(function (a, b) {
+                    return ((a.diametro < b.diametro) ? -1 : ((a.diametro == b.diametro) ? 0 : 1));
+                });
+
+                giorno.diametriOrdinati = [];
+                giorno.pesiOrdinati = [];
+                for (var k = 0; k < list.length; k++) {
+                    giorno.diametriOrdinati[k] = list[k].diametro;
+                    giorno.pesiOrdinati[k] = list[k].peso;
+                }
+            });
+
+            document.getElementById("div_dato_tempo_on").innerHTML = getTempo(tempoAccesa);
+            document.getElementById("div_dato_tempo_work").innerHTML = getTempo(tempoLavoro);
+            document.getElementById("div_dato_peso_tot").innerHTML = peso + umPeso;
+            document.getElementById("div_tabella_diametri_pesi").innerHTML = tabellaLavoro(new Array(" Ø ", umPeso, " % "), datiIntervallo, false);
+            
+            var strPeriodo;
+            if (datiIntervallo.length > 1) {
+
+                strPeriodo = " From: " + formattaData(inizio) + " to: " + formattaData(fine);
+                
+            }
+            else {
+
+                strPeriodo = formattaData(inizio);
+                
+            }
+            
+            document.getElementById("div_data_selezionata").innerHTML =
+            datiIntervallo.length + " days -" + strPeriodo;
+        }
+
+        
+    </script>
+    
+    <script type="text/javascript">
+
+        function dateChangedGiornoS(calendar) {
+            //specialDateStatusFunc;
+            if (calendar.dateClicked) {
+                // OK, a date was clicked, redirect to /yyyy/mm/dd/index.php
+                var y = calendar.date.getFullYear();
+                var m = calendar.date.getMonth() + 1; // integer, 0..11
+                var d = calendar.date.getDate(); // integer, 1..31
+
+                if (m < 10) { m = "0" + m; }
+                if (d < 10) { d = "0" + d; }
+
+                //recupero la data selezionata,e richiamo la costruzione della tabella
+                //                visualizza(d + "/" + m + "/" + y);
+
+                dataSelz = y + "" + m + "" + d;
+
+                VisualizzaScelta(dataSelz, dataSelz);
+            }
+        };
+
+
+        function dateChangedGiornoA(calendar) {
+            //specialDateStatusFunc;
+            if (calendar.dateClicked) {
+                // OK, a date was clicked, redirect to /yyyy/mm/dd/index.php
+                var y = calendar.date.getFullYear();
+                var m = calendar.date.getMonth() + 1; // integer, 0..11
+                var d = calendar.date.getDate(); // integer, 1..31
+
+                if (m < 10) { m = "0" + m; }
+                if (d < 10) { d = "0" + d; }
+
+                //recupero la data selezionata,e richiamo la costruzione della tabella
+                //                visualizza(d + "/" + m + "/" + y);
+
+
+                dataSelzA = y + "" + m + "" + d;
+            }
+        };
+
+
+        function dateChangedGiornoB(calendar) {
+            //specialDateStatusFunc;
+            if (calendar.dateClicked) {
+                // OK, a date was clicked, redirect to /yyyy/mm/dd/index.php
+                var y = calendar.date.getFullYear();
+                var m = calendar.date.getMonth() + 1; // integer, 0..11
+                var d = calendar.date.getDate(); // integer, 1..31
+
+                if (m < 10) { m = "0" + m; }
+                if (d < 10) { d = "0" + d; }
+
+                //recupero la data selezionata,e richiamo la costruzione della tabella
+                //                visualizza(d + "/" + m + "/" + y);
+                dataSelzB = y + "" + m + "" + d;
+                //VisualizzaScelta();
+                VisualizzaScelta(dataSelzA, dataSelzB);
+            }
+        };
+
+
+
+        function dateIsSpecial(year, month, day) {
+
+            month = parseInt(month) + 1;
+            if (month < 10) { month = "0" + month; }
+            if (day < 10) { day = "0" + day; }
+            var i = 0;
+            for (i in GiorniSpeciali) {
+//                if ((day + "/" + month + "/" + year) == GiorniSpeciali[i]) {
+                if ((year + "" + month + "" + day) == GiorniSpeciali[i]) {
+                    return true;
+                } else {
+                }
+            }
+            return false;
+        };
+
+        function specialDateStatusFunc(date, y, m, d) {
+            if (dateIsSpecial(y, m, d)) {
+                return "special";
+            }
+            else
+                return true; // other dates are enabled
+            // return true if you want to disable other dates
+        };
+    </script>
+    
+    <!--<script type="text/javascript" src="datiProdTest.js"></script> -->   
+    
+        
+<style type="text/css">/* Chart.js */
+/*
+ * DOM element rendering detection
+ * https://davidwalsh.name/detect-node-insertion
+ */
+@keyframes chartjs-render-animation {
+	from { opacity: 0.99; }
+	to { opacity: 1; }
+}
+
+.chartjs-render-monitor {
+	animation: chartjs-render-animation 0.001s;
+}
+
+/*
+ * DOM element resizing detection
+ * https://github.com/marcj/css-element-queries
+ */
+.chartjs-size-monitor,
+.chartjs-size-monitor-expand,
+.chartjs-size-monitor-shrink {
+	position: absolute;
+	direction: ltr;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	pointer-events: none;
+	visibility: hidden;
+	z-index: -1;
+}
+
+.chartjs-size-monitor-expand > div {
+	position: absolute;
+	width: 1000000px;
+	height: 1000000px;
+	left: 0;
+	top: 0;
+}
+
+.chartjs-size-monitor-shrink > div {
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	left: 0;
+	top: 0;
+}
+</style></head>
+<body onload="init()">
+
+    <!-- Intestazione Schnell -->       
+
+    <div class="header001" style="height:85px;background-color:dimgrey;box-shadow:0px 6px 7px black">
+        <a href="https://www.schnell.it/it/"><img src="./Production_files/logo.png" height="45px" style="float:left; margin:20px"></a>
+        <div style="float:right; margin:35px 25px 0 0">
+            <span class="fontOrange">Serial: </span>
+            <span class="fontWhite" id="spanMatricola"> TELESCOPE</span>
+        </div>
+        <div style="float:right; margin:35px 20px 0 0">
+            <span class="fontOrange">Version: </span>
+            <span class="fontWhite" id="spanVersione">Cage108 4.4.34</span>
+        </div>
+        <script type="text/javascript">
+            document.getElementById("spanMatricola").innerHTML = matricola;
+            document.getElementById("spanVersione").innerHTML = versione;
+        </script>
+        <!-- menu AL MOMENTO SARA' NASCOSTO -->
+        <!--
+        <div style="padding-top:20px;float:right;">
+            <table>
+                <tr>
+                    <td><a href='index.htm'><img src='style/images/icon/32/grafico.png' alt='Produzione' style='border:0px' /></a></td>
+                    <td><a href='eventi.htm'><img src='style/images/icon/32/clock.png' alt='Eventi' style='border:0px' /></a></td>
+                    <td><a href='status.htm'><img src='style/images/icon/48/motori.png' alt='Status' style='border:0px' /></a></td>
+
+                </tr>
+            </table>
+        </div>
+    -->
+    </div>
+
+    <!-- Corpo pagina -->
+    <div style="margin-top:20px; min-width:1024px;" class="main">
+        <!-- div menu dati di lavoro-->
+        <div style="margin-left:20px;margin-right:20px;height:100px;width:auto;background-color:#FFFFFF; border:solid 1px #A9A9A9;">
+
+            <!-- pulsante per esportazione -->
+            <div style="float:left; margin-top:10px; margin-left:10px;">
+                <img id="downloadButton" src="./Production_files/downloadCSV.png" onclick="exportProductionToCSV()">
+            </div>
+
+            <!-- div scelta periodo -->
+            <div style="float:left;margin:15px 20px 0px 20px;">
+                <div style="float:left;">
+                <table style="text-align:left;">
+                    <tbody><tr><td><input type="radio" name="selezione" value="totale" checked="checked" onclick="VisualizzaSceltaPeriodo(&#39;totale&#39;)">Total</td></tr>
+                    <tr><td><input type="radio" name="selezione" value="giorno" onclick="VisualizzaSceltaPeriodo(&#39;singolo&#39;)">Daily</td></tr>
+                    <tr><td><input type="radio" name="selezione" value="intervallo" onclick="VisualizzaSceltaPeriodo(&#39;periodo&#39;)">Range</td></tr>
+                </tbody></table>
+                </div>
+                <div style="float:left; padding-left:20px;">
+	             <div id="divCalendarioS" style="display:none;float:left;">
+	           <img alt="Select day" id="btCal_S" src="./Production_files/calDA.png" border="0" style="cursor:pointer">
+	          </div>	
+                    <div id="divCalendarioA" style="display:none;float:left;">
+	           <img alt="Select day from" id="btCal_A" src="./Production_files/calDA.png" border="0" style="cursor:pointer">
+	          </div>							
+	          <div id="divCalendarioB" style="display:none;float:left;">
+	           <img alt="Select day to" id="btCal_B" src="./Production_files/calA.png" border="0" style="cursor:pointer">
+	          </div>	                    
+                </div>
+            </div> 
+            <!-- div info -->
+            <div style="float:right;margin:15px 175px 0px 0px">
+                <table style="text-align:left;">
+                    <!--VISUALIZZO TEMPO ACCENSIONE-->
+                    <tbody><tr>
+                        <td>
+                            <img alt="Time on" src="./Production_files/orologio.png">
+                        </td>
+                        <td>
+                            time on:
+                        </td>
+                        <td style="padding-left:10px; font-weight:bold; font-style:italic;">
+                            <div id="div_dato_tempo_on">2 h : 58 m</div>
+                        </td>
+                    </tr>
+                    <!--VISUALIZZO TEMPO DI LAVORO-->
+                    <tr>
+                        <td>
+                            <img alt="Automatic" src="./Production_files/timwor.png">
+                        </td>
+                        <td>
+                            Automatic:
+                        </td>
+                        <td style="padding-left:10px; font-weight:bold; font-style:italic;">
+                            <div id="div_dato_tempo_work">0 h : 5 m</div>
+                        </td>
+                    </tr>
+                    <!--VISUALIZZO PESO LAVORATO-->
+                    <tr>
+                        <td>
+                            <img alt="Total weight" src="./Production_files/peso.png">
+                        </td>
+                        <td>
+                            Total weight:
+                        </td>
+                        <td style="padding-left:10px; font-weight:bold; font-style:italic;">
+                            <div id="div_dato_peso_tot">3274872 kg </div>
+                        </td>
+                    </tr>
+                </tbody></table>                
+            </div>
+        </div>
+        
+        <!-- div dati -->
+        <div style="margin-left:20px;margin-right:20px;height:500px;width:auto;">
+            <!-- div grafico -->
+            <div style="float:left; width:560px; height:450px; background-color:#FFFFFF; border:solid 1px #A9A9A9; padding:15px;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <canvas id="my_chart" style="display: block; height: 280px; width: 560px;" width="1680" height="840" class="chartjs-render-monitor"></canvas>
+            </div> 
+            <!-- div tabella -->
+            <div style="margin-top:10px;margin-left:600px;height:480px;background-color:#FFFFFF; border:solid 1px #A9A9A9;">
+                <div id="div_data_selezionata" style="margin:10px;text-align:center;">1 days -19/10/2021</div>
+                <div id="div_tabella_diametri_pesi" style="margin:10px;padding:5px;"><table id="eventi" class="eventi"><tbody><tr class="intestazione"><td class="intestazione"> Ø </td><td class="intestazione"> kg </td><td class="intestazione"> % </td></tr><tr class=""><td class="cella">20</td><td>3274872</td><td>100.0</td></tr></tbody></table></div>                            
+            </div> 
+        </div>
+    </div>
+                      
+        
+    <form action="http://192.168.1.136/#" method="get">
+        <input type="hidden" name="Ndata" id="hiddenCalS">
+        <input type="hidden" name="Ndata" id="hiddenCalA">
+        <input type="hidden" name="Ndata" id="hiddenCalB">
+    </form>
+    
+    <script type="text/javascript">
+        Calendar.setup(
+            {
+                inputField: "hiddenCalS",               // ID of the input field
+                ifFormat: "%m %d, %Y",                  // the date format
+                button: "btCal_S",                 // ID of the button
+                onUpdate: dateChangedGiornoS,            // Funzione da chiamare quando si seleziona una data
+                dateStatusFunc: specialDateStatusFunc,  // verifica se ci sono dati di produzione per ogni giorno del mese,abilitandolo al click
+                weekNumbers: false,                     // Nascondo i giorni della settimana
+                position: [600, 100] // Posizione in cui deve essere visualizzato
+            }
+        );    
+        Calendar.setup(
+            {
+                inputField: "hiddenCalA",               // ID of the input field
+                ifFormat: "%m %d, %Y",                  // the date format
+                button: "btCal_A",                 // ID of the button
+                onUpdate: dateChangedGiornoA,            // Funzione da chiamare quando si seleziona una data
+                dateStatusFunc: specialDateStatusFunc,  // verifica se ci sono dati di produzione per ogni giorno del mese,abilitandolo al click
+                weekNumbers: false,                     // Nascondo i giorni della settimana
+                position: [600, 100] // Posizione in cui deve essere visualizzato
+            }
+        );
+            //position: [document.body.offsetWidth / 2 - 100, 100] // Posizione in cui deve essere visualizzato
+        Calendar.setup(
+            {
+                inputField: "hiddenCalB",               // ID of the input field
+                ifFormat: "%m %d, %Y",                  // the date format
+                button: "btCal_B",                 // ID of the button
+                onUpdate: dateChangedGiornoB,            // Funzione da chiamare quando si seleziona una data
+                dateStatusFunc: specialDateStatusFunc,  // verifica se ci sono dati di produzione per ogni giorno del mese,abilitandolo al click
+                weekNumbers: false,                     // Nascondo i giorni della settimana
+                position: [600, 100] // Posizione in cui deve essere visualizzato
+            }
+        );        
+    </script>         
+
+
+<a download="Production.csv" href="blob:http://192.168.1.136/112fef4a-fe58-47e7-bb8b-3fc4e580c833" style="display: none;"></a><a download="Production.csv" href="blob:http://192.168.1.136/c18c1de2-1c5c-4925-97ef-fc35b0d48c0b" style="display: none;"></a><a download="Production.csv" href="blob:http://192.168.1.136/1e136577-7056-4fdc-bc75-8088408f6b46" style="display: none;"></a><a download="Production.csv" href="blob:http://192.168.1.136/78ab8d03-7a2e-4324-a007-995e4f72673c" style="display: none;"></a></body></html>

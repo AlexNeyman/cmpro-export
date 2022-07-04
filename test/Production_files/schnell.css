@@ -1,0 +1,862 @@
+﻿/* The main calendar widget.  DIV containing a table. */
+
+.calendar {
+  position:relative;
+  display: none;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  border-left: 2px solid #fff;
+  font-size: 11px;
+  color: #000;
+  cursor: default;
+  background: #d4d0c8;
+  font-family: tahoma,verdana,sans-serif;
+}
+
+.calendar table {
+  border-top: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #000;
+  font-size: 11px;
+  color: #000;
+  cursor: default;
+  background: #d4d0c8;
+  font-family: tahoma,verdana,sans-serif;
+}
+
+/* Header part -- contains navigation buttons and day names. */
+
+.calendar .button { /* "<<", "<", ">", ">>" buttons have this class */
+  text-align: center;
+  padding: 1px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #fff;
+}
+
+.calendar .nav {
+  /*background: transparent url(menuarrow.gif) no-repeat 100% 100%;*/
+}
+
+.calendar thead .title { /* This holds the current "month, year" */
+  font-weight: bold;
+  padding: 1px;
+  border: 1px solid #000;
+  background: #848078;
+  color: #fff;
+  text-align: center;
+}
+
+.calendar thead .headrow { /* Row <TR> containing navigation buttons */
+}
+
+.calendar thead .daynames { /* Row <TR> containing the day names */
+}
+
+.calendar thead .name { /* Cells <TD> containing the day names */
+  border-bottom: 1px solid #000;
+  padding: 2px;
+  text-align: center;
+  background: #f4f0e8;
+}
+
+.calendar thead .weekend { /* How a weekend day name shows in header */
+  color: #f00;
+}
+
+.calendar thead .hilite { /* How do the buttons in header appear when hover */
+  border-top: 2px solid #fff;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  border-left: 2px solid #fff;
+  padding: 0px;
+  background-color: #e4e0d8;
+}
+
+.calendar thead .active { /* Active (pressed) buttons in header */
+  padding: 2px 0px 0px 2px;
+  border-top: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #000;
+  background-color: #c4c0b8;
+}
+
+/* The body part -- contains all the days in month. */
+
+.calendar tbody .day { /* Cells <TD> containing month days dates */
+  width: 2em;
+  text-align: right;
+  padding: 2px 4px 2px 2px;
+}
+.calendar tbody .day.othermonth {
+  font-size: 80%;
+  color: #aaa;
+}
+.calendar tbody .day.othermonth.oweekend {
+  color: #faa;
+}
+
+.calendar table .wn {
+  padding: 2px 3px 2px 2px;
+  border-right: 1px solid #000;
+  background: #f4f0e8;
+}
+
+.calendar tbody .rowhilite td {
+  background: #e4e0d8;
+}
+
+.calendar tbody .rowhilite td.wn {
+  background: #d4d0c8;
+}
+
+.calendar tbody td.hilite { /* Hovered cells <TD> */
+  padding: 1px 3px 1px 1px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #fff;
+}
+
+.calendar tbody td.active { /* Active (pressed) cells <TD> */
+  padding: 2px 2px 0px 2px;
+  border-top: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #000;
+}
+
+.calendar tbody td.selected { /* Cell showing selected date */
+  font-weight: bold;
+  border-top: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #000;
+  padding: 2px 2px 0px 2px;
+  background: #e4e0d8;
+}
+
+.calendar tbody td.weekend { /* Cells showing weekend days */
+  color: #f00;
+}
+
+.calendar tbody td.today { /* Cell showing today date */
+  font-weight: bold;
+  color: #00f;
+}
+
+.calendar tbody .disabled { color: #999; }
+
+.calendar tbody .emptycell { /* Empty cells (the best is to hide them) */
+  visibility: hidden;
+}
+
+.calendar tbody .emptyrow { /* Empty row (some months need less than 6 rows) */
+  display: none;
+}
+
+/* The footer part -- status bar and "Close" button */
+
+.calendar tfoot .footrow { /* The <TR> in footer (only one right now) */
+}
+
+.calendar tfoot .ttip { /* Tooltip (status bar) cell <TD> */
+  background: #f4f0e8;
+  padding: 1px;
+  border: 1px solid #000;
+  background: #848078;
+  color: #fff;
+  text-align: center;
+}
+
+.calendar tfoot .hilite { /* Hover style for buttons in footer */
+  border-top: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #fff;
+  padding: 1px;
+  background: #e4e0d8;
+}
+
+.calendar tfoot .active { /* Active (pressed) style for buttons in footer */
+  padding: 2px 0px 0px 2px;
+  border-top: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #000;
+}
+
+/* Combo boxes (menus that display months/years for direct selection) */
+
+.calendar .combo {
+  position: absolute;
+  display: none;
+  width: 4em;
+  top: 0px;
+  left: 0px;
+  cursor: default;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #fff;
+  background: #e4e0d8;
+  font-size: 90%;
+  padding: 1px;
+  z-index: 100;
+}
+
+.calendar .combo .label,
+.calendar .combo .label-IEfix {
+  text-align: center;
+  padding: 1px;
+}
+
+.calendar .combo .label-IEfix {
+  width: 4em;
+}
+
+.calendar .combo .active {
+  background: #c4c0b8;
+  padding: 0px;
+  border-top: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #000;
+}
+
+.calendar .combo .hilite {
+  background: #048;
+  color: #fea;
+}
+
+.calendar td.time {
+  border-top: 1px solid #000;
+  padding: 1px 0px;
+  text-align: center;
+  background-color: #f4f0e8;
+}
+
+.calendar td.time .hour,
+.calendar td.time .minute,
+.calendar td.time .ampm {
+  padding: 0px 3px 0px 4px;
+  border: 1px solid #889;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+.calendar td.time .ampm {
+  text-align: center;
+}
+
+.calendar td.time .colon {
+  padding: 0px 2px 0px 3px;
+  font-weight: bold;
+}
+
+.calendar td.time span.hilite {
+  border-color: #000;
+  background-color: #766;
+  color: #fff;
+}
+
+.calendar td.time span.active {
+  border-color: #f00;
+  background-color: #000;
+  color: #0f0;
+}
+
+
+
+
+
+
+/************************************************************************************/
+
+html 
+{
+    height:100%;
+}
+body 
+{
+	font-family:Verdana, Arial, Tahoma;
+	font-size:11px;
+	margin: 0px auto;
+	text-align:center;
+	color:#000000;
+	width:100%;
+	height:100%;
+	min-width:1024px;
+	background-color:#EEEEEE;
+
+}
+
+a
+{
+	color:#000000;
+	text-decoration:none;
+}
+
+a:hover 
+{
+	color:#000000;
+	text-decoration:underline overline;
+}
+
+div.box
+{
+	text-align:left;
+	width:80% !important;width /**/:200px;
+    height:600px !important;height /**/: 200px;
+    overflow:auto;
+	/*padding: 4px;*/
+    border:1px solid #EEE;border-right:0 solid;
+
+} 
+
+label.log
+{
+	color:Black;
+}
+
+tr.riga
+{
+	border-width:medium;
+	border-color:Black;
+}
+
+tr.intestazione
+{
+	text-align:center;
+	background-color:#dcdcdc;
+	font-size:20px;
+	font-family:Tahoma;
+}
+
+td.intestazione
+{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+td.cella
+{
+	border-width:1px;
+	padding-top:3px;
+	padding-bottom:3px;
+}
+
+table.eventi
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#A9A9A9;
+    border-collapse:collapse;
+    border-spacing: 15px;
+    background:White ;
+    width:100%;
+    text-align:center ;
+    font-size:15px;
+}
+
+/*
+table#tabDatiProd
+{
+    border: 3px solid #0099FF;
+    border-collapse: collapse;
+    border-spacing: 15px;
+    background : White ;
+    width : 200px ;
+    text-align : center ;
+    font-size : 15px;
+} 
+*/
+
+
+td#intestazione
+{
+    background : #ebe9e9 ;
+    padding : 10px ;
+    border-width : 5px ;
+    font-size : 16px ;
+}
+
+
+
+/**************
+creo righe di colore alternato
+****************/
+tr.odd td,tr.odd th
+{
+	background: #D5E4FF;
+}
+
+
+/**********************************TEST SIMONE**********************************/
+
+.fontOrange {
+    color: darkorange;
+    font-size:14px;
+    font-weight:600;
+}
+
+.fontWhite {
+    color: white;
+     font-size:14px
+}
+
+/********************************************************************************/
+.main {
+    width: 100%;
+    background-color: #EEEEEE;
+    color: #000000;
+    text-align: left;
+    vertical-align: top;
+}
+
+/********************************************************************************/
+
+
+div#lingua
+{
+    width:300px;
+    float:left;
+    padding-top:0px;
+    text-align:right;
+}
+div#lingua a {
+  text-decoration:none;
+}
+div#lingua a:hover {
+  text-decoration:underline overline;
+}
+
+
+
+.contentFilter
+{
+    width:100%;
+    background-color: #555555;
+    color: #EEEEEE;
+}
+
+/********************************************************************************/
+/* TITOLI                                                                       */
+/********************************************************************************/
+
+.titleFont
+{
+	width:100%;
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:#a9a9a9;
+	text-align:center;
+	font-size:12px;
+	color:#FFFFFF;
+	text-transform: uppercase;
+	font-weight:bold;
+}
+.titleFontGrey
+{
+	width:100%;
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:#a9a9a9;
+	font-size:12px;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	font-weight:bold;
+	padding: 3px 0px 3px 3px;
+	border-bottom: solid 1px #555555;
+}
+.titleFontBlack
+{
+    width:100%;
+	height:22px;
+	text-align:center;
+	font-size:12px;
+	color:#000000;
+	text-transform: uppercase;
+	font-weight:bold;
+}
+.titleFontGrey:hover
+{
+	width:100%;
+	background-color:#FFFFFF;
+	font-size:12px;
+	color:#a9a9a9;
+	text-transform:uppercase;
+	font-weight:bold;
+	padding: 3px 0px 3px 3px;
+	cursor:pointer;
+	border-bottom: solid 1px #555555;
+}
+.titleFontGreyFix
+{
+    width:100%;
+	background-color:#a9a9a9;
+	font-size:12px;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	font-weight:bold;
+	padding: 3px 3px 3px 3px;
+	border-bottom: solid 1px #555555;
+	text-align:left;
+}
+.titleFontGreyBorder
+{
+    width:100%;
+	background-color:#a9a9a9;
+	font-size:12px;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	font-weight:bold;
+	padding: 3px 0px 3px 0px;
+	border: solid 1px #555555;
+}
+.subTitle
+{
+    width:100%;
+    color:#555555;
+	text-align:left;
+	font-size:11px;
+	font-weight:bold;
+	text-transform:capitalize;
+	font-weight:bold;
+	padding:10px 10px 10px 10px;
+}
+.titScheda
+{
+    width:100%;
+    background-color:#eeeeee;
+    color:#000000;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    padding: 3px 0px 3px 0px;
+}
+
+
+.contenutoMenu
+{
+    padding: 5px 5px 5px 5px;
+    background-color:#FFFFFF;
+    font-style:italic;
+}
+/********************************************************************************/
+/* GRID VIEW STYLE                                                              */
+/********************************************************************************/
+.gvStyle
+{
+	border-style:hidden;
+	border-width:0px;
+	padding: 5px 5px 5px 5px;
+	width:100%;
+}
+.gvHeader
+{
+	text-align:center;
+	background-color:#555555;
+	color:#FFFFFF;
+	text-transform:uppercase;
+}
+.gvRow
+{
+	border-style:hidden;
+	border-width:0px;
+}
+.gvRow:hover
+{
+	border-style:hidden;
+	border-width:0px;
+	background-color:#A9A9A9;
+	color:#FFFFFF;
+}
+.gvRow:hover a
+{
+	color:#FFFFFF;
+}
+.gvAltRow
+{
+	background-color:#FFFFFF;
+}
+.gvAltRow:hover
+{
+	border-style:none;
+	border-width:0px;
+	color:#FFFFFF;
+	background-color:#A9A9A9;
+}
+.gvAltRow:hover a
+{
+	color:#FFFFFF;
+}
+.gvEdit
+{
+    border-style:hidden;
+	border-width:0px;
+	background-color:#fffeb7;
+	vertical-align:top;
+}
+
+
+/******************************************************************************/
+.watermarked
+{
+	font-family: Verdana, Arial, 'Times New Roman';
+	font-size:11px;
+	background-color:#FFFDBE;
+	color:#A9A9A9;
+}
+.watermarkedBig
+{
+	font-family: Verdana, Arial, 'Times New Roman';
+	font-size:12px;
+	background-color:#FFFDBE;
+	color:#A9A9A9;
+}
+/**********************************/
+/* MESSAGGI DI TESTO VISUALIZZATI */
+/**********************************/
+.redMess
+{
+	border-color:Red;
+	font-weight:bold;
+	color:Red;
+}
+.greenMess
+{
+	border-color:Green;
+	font-weight:bold;
+	color:Green;
+}
+.yellowMess
+{
+	border-color:Yellow;
+	font-weight:bold;
+	color:Yellow;
+}
+/**********************************/
+.option
+{
+	color:#5fa3ff;
+	padding-top:3px;
+	width:50%;
+}
+/***********************************************************************************************************/
+/* Font e sfondo dei vari stati delle schede di conformità */
+/***********************************************************/
+
+.fontAperta
+{
+    color:#8cff97;
+}
+.rowAperta
+{
+    background-color:#8cff97;
+}
+.rowAperta:hover
+{
+	background-color:#A9A9A9;
+	color:#FFFFFF;
+}
+.Aperta
+{
+    background-image:url(images/layout/sfondoAperta.png);
+    background-repeat:repeat-x;
+    font-style:italic;
+    width:100%;
+    padding: 3px 3px 3px 3px;
+}
+/**************/
+.fontChiusa
+{
+    color:#ff6a6a;
+}
+.rowChiusa
+{
+    background-color:#ff6a6a;
+}
+.rowChiusa:hover
+{
+	background-color:#A9A9A9;
+	color:#FFFFFF;
+}
+.Chiusa
+{
+    background-image:url(images/layout/sfondoChiusa.png);
+    background-repeat:repeat-x;
+    font-style:italic;
+    width:100%;
+    padding: 3px 3px 3px 3px;
+}
+/**************/
+.fontSospesa
+{
+    color:#feff8c;
+}
+.rowSospesa
+{
+    background-color:#feff8c;
+}
+.rowSospesa:hover
+{
+	background-color:#A9A9A9;
+	color:#FFFFFF;
+}
+.Sospesa
+{
+    background-image:url(images/layout/sfondoSospesa.png);
+    background-repeat:repeat-x;
+    font-style:italic;
+    width:100%;
+    padding: 3px 3px 3px 3px;
+}
+/**************/
+.fontLimitMac
+{
+    color:#ffba4e;
+}
+.rowLimitMac
+{
+    background-color:#ffba4e;
+}
+.rowLimitMac:hover
+{
+	background-color:#A9A9A9;
+	color:#FFFFFF;
+}
+.LimitMac
+{
+    background-image:url(images/layout/sfondoLimitMac.png);
+    background-repeat:repeat-x;
+    font-style:italic;
+    width:100%;
+    padding: 3px 3px 3px 3px;
+}
+/**************/
+.fontAnnullata
+{
+    color:#a0dcff;
+}
+.rowAnnullata
+{
+    background-color:#a0dcff;
+}
+.rowAnnullata:hover
+{
+	background-color:#A9A9A9;
+	color:#FFFFFF;
+}
+.Annullata
+{
+    background-image:url(images/layout/sfondoAnnullata.png);
+    background-repeat:repeat-x;
+    font-style:italic;
+    width:100%;
+    padding: 3px 3px 3px 3px;
+}
+/**************/
+.fontNonImpostato
+{
+    color:#FFFFFF;
+}
+.rowNonImpostato
+{
+    background-color:#FFFFFF;
+}
+.rowNonImpostato:hover
+{
+	background-color:#A9A9A9;
+	color:#FFFFFF;
+}
+.NonImpostato
+{
+    background-color:#FFFFFF;
+    font-style:italic;
+    width:100%;
+    padding: 3px 3px 3px 3px;
+}
+/******************************************/
+/* visualizzazione schede */
+/******************************************/
+.infoSchede
+{
+    width:auto;
+    padding-right:20px;
+    vertical-align:top;
+    text-align:right;
+    font-style:italic;
+    color:#595959;
+}
+
+.pnlMessaggi
+{
+    background-color:#FFFDBE;
+    width:100%;
+    padding-left:5px;
+}
+
+/**********************/
+/* Style per schede   */
+/**********************/
+.testoSchede
+{
+    text-align:right;
+    font-weight:bold;
+    font-style:italic;
+    padding-right:3px;
+    padding-top:3px;
+    width:30%;
+    vertical-align:top;
+}
+.datiSchede
+{
+    text-align:left;
+    padding-left:3px;
+    width:70%;
+}
+/**************************************************************/
+/* STYLE DELLA PROGRESS BAR */
+/**************************************************************/
+
+#centerImg 
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 208px;
+	height: 13px;
+	margin: auto;
+	
+}
+#centerImg 
+{
+	top: 50%;
+	left: 50%;
+	margin-left: -100px;
+	margin-top: 0px;
+}
+
+
+/* csv download */
+#downloadButton 
+{
+    height: 70px;
+    border: 1px solid white;
+}
+
+    #downloadButton:hover
+    {
+        border: 1px solid green; 
+    }
+
+    #downloadButton:active {
+        border: 1px solid white;
+    }
